@@ -1,17 +1,11 @@
-const webpack = require("webpack");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 // var path = require("path");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
-  entry: {
-    app: [`${__dirname}/src/index.jsx`, `${__dirname}/src/css/styles.css`],
-    vendor: ["babel-polyfill", "React"]
-  },
+  entry: [`${__dirname}/src/index.jsx`, `${__dirname}/src/css/styles.css`],
   output: {
-    path: path.resolve("./dist/js/"),
-    filename: "[name].[chunkhash:8].js",
-    chunkFilename: "[id].[chunkhash:8].js"
+    path: `${__dirname}/dist/js`,
+    filename: "bundle.js"
   },
   watch: true,
   module: {
@@ -25,8 +19,7 @@ module.exports = {
             presets: ["env"],
             plugins: [
               "transform-object-rest-spread",
-              "transform-class-properties",
-              "syntax-dynamic-import"
+              "transform-class-properties"
             ]
           }
         }
@@ -40,8 +33,7 @@ module.exports = {
             presets: ["react", "env"],
             plugins: [
               "transform-object-rest-spread",
-              "transform-class-properties",
-              "syntax-dynamic-import"
+              "transform-class-properties"
             ]
           }
         }
@@ -102,16 +94,13 @@ module.exports = {
   },
   devtool: "source-map",
   resolve: { extensions: [".js", ".jsx"] },
-
+  node: {
+    fs: "empty",
+    net: "empty"
+  },
   plugins: [
     new ExtractTextPlugin({
       filename: "../css/styles.css"
-    }),
-    new webpack.optimize.CommonsChunkPlugin({ names: ["vendor", "manifest"] }),
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      inject: "head",
-      filename: "../index.html"
     })
   ]
 };

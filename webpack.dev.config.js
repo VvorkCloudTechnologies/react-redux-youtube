@@ -3,8 +3,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist/js`,
     filename: "bundle.js",
-    publicPath: "/js",
-    chunkFilename: "[name].chunk.js"
+    publicPath: "/js"
   },
 
   module: {
@@ -19,8 +18,7 @@ module.exports = {
               presets: ["env"],
               plugins: [
                 "transform-object-rest-spread",
-                "transform-class-properties",
-                "syntax-dynamic-import"
+                "transform-class-properties"
               ]
             }
           }
@@ -36,8 +34,7 @@ module.exports = {
               presets: ["react", "env"],
               plugins: [
                 "transform-object-rest-spread",
-                "transform-class-properties",
-                "syntax-dynamic-import"
+                "transform-class-properties"
               ]
             }
           }
@@ -76,7 +73,10 @@ module.exports = {
     contentBase: "./dist",
     historyApiFallback: true
   },
-
+  node: {
+    fs: "empty",
+    net: "empty"
+  },
   devtool: "source-map",
 
   resolve: { extensions: [".js", ".jsx"] }
