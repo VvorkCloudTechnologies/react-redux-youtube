@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { handleQuery, getData } from "../actions";
+import Users from "./Users";
 class App extends Component {
   componentDidMount() {
     this.props.getData();
@@ -47,6 +48,7 @@ class App extends Component {
     });
     return (
       <div>
+        <Users />
         <form>
           <input type="text" onChange={this.props.handleQuery} />
           <input type="submit" />
